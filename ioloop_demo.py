@@ -43,7 +43,9 @@ def asynchronous_fetch(url, callback):
 if __name__ == '__main__':
     ioloop = tornado.ioloop.IOLoop.current()
     print(synchronous_fetch('http://www.baidu.com/'))
-    ioloop.run_sync(lambda : asynchronous_fetch('http://www.baidu.com', lambda x: print(x)))
+    #  if the `.IOLoop` is not yet running, you can start the IOLoop, run the coroutine,
+    # and then stop the IOLoop with the IOLoop.run_sync method.
+    ioloop.run_sync(lambda: asynchronous_fetch('http://www.baidu.com', lambda x: print(x)))
     # call asynchronous func
     ioloop.spawn_callback(asynchronous_fetch, 'http://www.baidu.com', lambda x: print(x))
     ioloop.spawn_callback(print_response, 'http://www.baidu.com')

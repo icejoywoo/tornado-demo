@@ -15,6 +15,13 @@ def foo():
 
 
 bar = foo()
+# trigger the generator
 bar.next()
+bar.send('Hello, yield!')
+bar.send('Hello, yield!')
+
+bar = foo()
+# trigger the generator
+bar.send(None)
 bar.send('Hello, yield!')
 bar.send('Hello, yield!')
